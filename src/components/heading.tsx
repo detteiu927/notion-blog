@@ -13,7 +13,7 @@ export default ({
   children: component,
   id,
 }: {
-  children: React.ReactElement
+  children: React.ReactElement & { props: { children?: any } }
   id?: any
 }) => {
   const children = component.props.children || ''
