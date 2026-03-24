@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import fetch from 'node-fetch'
 import { useRouter } from 'next/router'
 import Header from '../../components/header'
 import Heading from '../../components/heading'
@@ -28,7 +27,7 @@ export async function getStaticProps({ params: { slug }, preview }) {
         redirect: '/blog',
         preview: false,
       },
-      unstable_revalidate: 5,
+      revalidate: 5,
     }
   }
   const postData = await getPageData(post.id)
@@ -64,7 +63,7 @@ export async function getStaticProps({ params: { slug }, preview }) {
       post,
       preview: preview || false,
     },
-    unstable_revalidate: 10,
+    revalidate: 10,
   }
 }
 
@@ -93,7 +92,7 @@ const RenderPost = ({ post, redirect, preview }) => {
       key: string
       isNested?: boolean
       nested: string[]
-      children: React.ReactFragment
+      children: React.ReactNode
     }
   } = {}
 
@@ -220,10 +219,14 @@ const RenderPost = ({ post, redirect, preview }) => {
             listTagName = null
           }
 
-          const renderHeading = (Type: string | React.ComponentType) => {
+          const renderHeading = (Tag: string) => {
             toRender.push(
               <Heading key={id}>
-                <Type key={id}>{textBlock(properties.title, true, id)}</Type>
+                {React.createElement(
+                  Tag,
+                  { key: id },
+                  textBlock(properties.title, true, id)
+                )}
               </Heading>
             )
           }

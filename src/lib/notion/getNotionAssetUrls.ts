@@ -1,4 +1,3 @@
-import fetch from 'node-fetch'
 import { getError } from './rpc'
 import { NextApiResponse } from 'next'
 import { NOTION_TOKEN, API_ENDPOINT } from './server-constants'
@@ -31,7 +30,7 @@ export default async function getNotionAsset(
   })
 
   if (assetRes.ok) {
-    return assetRes.json()
+    return assetRes.json() as any
   } else {
     console.log('bad request', assetRes.status)
     res.json({ status: 'error', message: 'failed to load Notion asset' })
