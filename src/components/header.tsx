@@ -34,10 +34,11 @@ export default ({ titlePre = '' }) => {
         {navItems.map(({ label, page, link }) => (
           <li key={label}>
             {page ? (
-              <Link href={page}>
-                <a className={pathname === page ? 'active' : undefined}>
-                  {label}
-                </a>
+              <Link
+                href={page}
+                className={pathname === page ? 'active' : undefined}
+              >
+                {label}
               </Link>
             ) : (
               <ExtLink href={link}>{label}</ExtLink>

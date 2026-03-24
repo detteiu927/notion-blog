@@ -1,3 +1,5 @@
+import React from 'react'
+
 const collectText = (el, acc = []) => {
   if (el) {
     if (typeof el === 'string') acc.push(el)
@@ -7,7 +9,13 @@ const collectText = (el, acc = []) => {
   return acc.join('').trim()
 }
 
-export default ({ children: component, id }: { children: any; id?: any }) => {
+export default ({
+  children: component,
+  id,
+}: {
+  children: React.ReactElement
+  id?: any
+}) => {
   const children = component.props.children || ''
   let text = children
 
